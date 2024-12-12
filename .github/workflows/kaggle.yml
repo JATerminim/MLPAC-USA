@@ -1,0 +1,21 @@
+name: Kaggle API
+
+on:
+  push:
+    branches: [ main ]
+
+jobs:
+  kaggle-api:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v3
+    - name: Set up Python
+      uses: actions/setup-python@v4
+      with:
+        python-version: '3.10' 
+    - name: Install kagglehub
+      run: pip install kagglehub
+    - name: Download dataset with kagglehub
+      run: |
+        python -c "import kagglehub; kagglehub.dataset_download('krishnaraj30/finance-loan-approval-prediction-data')"
